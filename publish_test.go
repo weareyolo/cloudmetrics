@@ -18,6 +18,7 @@ import (
 	"fmt"
 	"io"
 	"io/ioutil"
+	"os"
 	"sort"
 	"strings"
 	"testing"
@@ -31,15 +32,7 @@ import (
 
 var debug = func(*Publisher) {}
 
-//var debug = Debug(os.Stderr)
-
-func Debug(w io.Writer) func(*Publisher) {
-	return func(p *Publisher) {
-		p.debug = func(args ...interface{}) {
-			fmt.Fprintln(w, args...)
-		}
-	}
-}
+var debug2 = Debug(os.Stderr)
 
 type Mock struct {
 	Inputs []*cloudwatch.PutMetricDataInput
@@ -311,6 +304,13 @@ func TestPollOnceInvalidDimensions(t *testing.T) {
 	}
 }
 
+type NilWriter struct {
+}
+
+func (n NilWriter) Write(p []byte) (int, error) {
+	return len(p), nil
+}
+
 func TestPublish(t *testing.T) {
 	ctx, cancel := context.WithCancel(context.Background())
 	go func() {
@@ -330,7 +330,7 @@ func TestPublish(t *testing.T) {
 	}
 
 	mock := &Mock{}
-	Publish(registry, namespace, Client(mock), Interval(time.Millisecond*50), Context(ctx))
+	Publish(registry, namespace, Client(mock), Interval(time.Millisecond*50), Context(ctx), Debug(NilWriter{}))
 
 	if len(mock.Inputs) == 0 {
 		t.Error("expected at least one datum to have been published")

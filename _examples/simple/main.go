@@ -1,6 +1,7 @@
 package main
 
 import (
+	"os"
 	"time"
 
 	"github.com/rcrowley/go-metrics"
@@ -13,5 +14,8 @@ func main() {
 	t.Update(time.Millisecond)
 
 	// publish metrics to cloudwatch
-	cloudmetrics.Publish(nil, metrics.DefaultRegistry, "sample-namespace")
+	cloudmetrics.Publish(metrics.DefaultRegistry, "sample-namespace",
+		cloudmetrics.Interval(5*time.Second),
+		cloudmetrics.Debug(os.Stderr),
+	)
 }

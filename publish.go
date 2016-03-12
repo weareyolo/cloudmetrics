@@ -311,3 +311,12 @@ func Context(ctx context.Context) func(*Publisher) {
 		p.ctx = ctx
 	}
 }
+
+// Debug writes additional data to the writer specified
+func Debug(w io.Writer) func(*Publisher) {
+	return func(p *Publisher) {
+		p.debug = func(args ...interface{}) {
+			fmt.Fprintln(w, args...)
+		}
+	}
+}
