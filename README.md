@@ -1,5 +1,7 @@
 cloudmetrics 
 --------------
+[![Build Status](https://snap-ci.com/savaki/cloudmetrics/branch/master/build_image)](https://snap-ci.com/savaki/cloudmetrics/branch/master)
+[![GoDoc](https://godoc.org/github.com/savaki/cloudmetrics?status.svg)](https://godoc.org/github.com/savaki/cloudmetrics)
 
 This is a reporter for the [go-metrics](https://github.com/rcrowley/go-metrics)
 that will posts metrics to [CloudWatch](https://aws.amazon.com/cloudwatch/).
