@@ -176,7 +176,7 @@ func (p *Publisher) pollOnce() Datums {
 			}
 
 		default:
-			p.debug("Received unexpected metric,", i)
+			p.debug(fmt.Sprintf("Received unexpected metric, %#v", i))
 			return
 		}
 	})
