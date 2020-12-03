@@ -1,11 +1,12 @@
 package main
 
 import (
-	"os"
 	"time"
 
+	"github.com/sirupsen/logrus"
+
 	"github.com/rcrowley/go-metrics"
-	"github.com/savaki/cloudmetrics"
+	"github.com/weareyolo/cloudmetrics"
 )
 
 func main() {
@@ -13,9 +14,13 @@ func main() {
 	metrics.Register("sample", t)
 	t.Update(time.Millisecond)
 
+	logger := logrus.New()
+	logger.SetLevel(logrus.DebugLevel)
+
 	// publish metrics to cloudwatch
-	cloudmetrics.Publish(metrics.DefaultRegistry, "sample-namespace",
-		cloudmetrics.Interval(5*time.Second),
-		cloudmetrics.Debug(os.Stderr),
+	p := cloudmetrics.NewPublisher(metrics.DefaultRegistry, "sample-namespace",
+		cloudmetrics.WithInterval(5*time.Second),
+		cloudmetrics.WithLogger(logger),
 	)
+	p.Publish()
 }
