@@ -2,7 +2,7 @@
 
 [![GoDoc](https://godoc.org/github.com/savaki/cloudmetrics?status.svg)](https://godoc.org/github.com/savaki/cloudmetrics)
 
-This is a reporter for the [go-metrics](https://github.com/rcrowley/go-metrics)
+This is a reporter for the [go-metrics](https://github.com/weareyolo/go-metrics)
 that will posts metrics to [CloudWatch](https://aws.amazon.com/cloudwatch/).
 
 ## Usage
@@ -27,7 +27,7 @@ import (
     "time"
 
     "github.com/aws/aws-sdk-go/service/cloudwatch"
-    "github.com/rcrowley/go-metrics"
+    "github.com/weareyolo/go-metrics"
     "github.com/weareyolo/cloudmetrics"
 )
 

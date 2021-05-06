@@ -9,7 +9,7 @@ import (
 
 	"github.com/aws/aws-sdk-go/service/cloudwatch"
 	"github.com/gojuno/minimock/v3"
-	"github.com/rcrowley/go-metrics"
+	"github.com/weareyolo/go-metrics"
 )
 
 // DatumBuilderMock implements cloudmetrics.DatumBuilder

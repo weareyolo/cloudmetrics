@@ -20,7 +20,7 @@ import (
 
 	"github.com/aws/aws-sdk-go/aws"
 	"github.com/aws/aws-sdk-go/service/cloudwatch"
-	"github.com/rcrowley/go-metrics"
+	"github.com/weareyolo/go-metrics"
 )
 
 var convertDuration = map[string](func(v float64) float64){

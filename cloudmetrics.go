@@ -16,7 +16,7 @@ package cloudmetrics
 
 import (
 	"github.com/aws/aws-sdk-go/service/cloudwatch"
-	"github.com/rcrowley/go-metrics"
+	"github.com/weareyolo/go-metrics"
 )
 
 // Publisher handles the publication of metrics data to CloudWatch

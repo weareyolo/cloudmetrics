@@ -5,7 +5,7 @@ import (
 
 	"github.com/sirupsen/logrus"
 
-	"github.com/rcrowley/go-metrics"
+	"github.com/weareyolo/go-metrics"
 	"github.com/weareyolo/cloudmetrics"
 )
 

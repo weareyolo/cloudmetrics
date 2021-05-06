@@ -25,7 +25,7 @@ import (
 	"github.com/aws/aws-sdk-go/service/cloudwatch"
 
 	"github.com/gojuno/minimock/v3"
-	"github.com/rcrowley/go-metrics"
+	"github.com/weareyolo/go-metrics"
 	"github.com/sirupsen/logrus"
 	"github.com/sirupsen/logrus/hooks/test"
 	"github.com/stretchr/testify/assert"
