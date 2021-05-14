@@ -20,8 +20,8 @@ import (
 
 	"github.com/aws/aws-sdk-go/aws"
 	"github.com/aws/aws-sdk-go/service/cloudwatch"
-	"github.com/rcrowley/go-metrics"
 	"github.com/stretchr/testify/assert"
+	"github.com/weareyolo/go-metrics"
 )
 
 func TestBuilder__BuildCounterData(t *testing.T) {
@@ -171,6 +171,14 @@ func TestBuilder__BuildHistogramData(t *testing.T) {
 			},
 		}, data)
 	})
+
+	t.Run("OK - No sample, with percentiles", func(t *testing.T) {
+		m := metrics.NewHistogram(metrics.NewUniformSample(512))
+		b := NewBuilder(nil, nil, []float64{0.44}, 30)
+		data := b.BuildHistogramData(m, name)
+
+		assert.Empty(t, data)
+	})
 }
 
 func TestBuilder__BuildTimerData(t *testing.T) {
@@ -184,7 +192,6 @@ func TestBuilder__BuildTimerData(t *testing.T) {
 
 		assert.Len(t, data, 1)
 		assert.Equal(t, &cloudwatch.MetricDatum{
-
 			MetricName:        aws.String(name + ".count"),
 			Value:             aws.Float64(1),
 			Unit:              aws.String(cloudwatch.StandardUnitCount),
@@ -286,5 +293,13 @@ func TestBuilder__BuildTimerData(t *testing.T) {
 				StorageResolution: aws.Int64(30),
 			},
 		}, data)
+	})
+
+	t.Run("OK - No sample, with percentiles", func(t *testing.T) {
+		m := metrics.NewTimer()
+		b := NewBuilder(nil, nil, []float64{0.5}, 30)
+		data := b.BuildTimerData(m, name)
+
+		assert.Empty(t, data)
 	})
 }
